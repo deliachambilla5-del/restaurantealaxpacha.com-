@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurante Alax Pacha</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+    }
+
+    header {
+      background-color: #3c2a21;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #5b3a29;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a, .lang-btn {
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      transition: background 0.3s;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-size: 1em;
+    }
+
+    nav a:hover, .lang-btn:hover {
+      background-color: #a36d44;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    #inicio {
+      background: url('https://png.pngtree.com/background/20250502/original/pngtree-italian-food-on-wooden-table-background-suitable-for-advertising-restaurant-picture-image_16468793.jpg') center/cover no-repeat;
+      color: white;
+      height: 100vh;
+    }
+
+    #menu {
+      background-color: #fff3e0;
+    }
+
+    #menu h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .plato {
+      width: 220px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      padding-bottom: 10px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .plato:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .plato img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .plato h3 {
+      margin: 10px 0 5px;
+      font-size: 1.1em;
+    }
+
+    .precio {
+      background-color: #a36d44;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 0.9em;
+    }
+
+    #nosotros {
+      background-color: #f4efe9;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      text-align: left;
+      padding: 60px 100px;
+    }
+
+    #nosotros .texto {
+      width: 50%;
+      line-height: 1.7;
+      font-size: 1.1em;
+    }
+
+    #nosotros img {
+      width: 350px;
+      height: 350px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    #reservas {
+      background-color: #e9d8c7;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .reservas-contenido {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      width: 100%;
+      gap: 30px;
+    }
+
+    #reservas form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      gap: 10px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    #reservas input, #reservas textarea, #reservas button {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    #reservas button {
+      background-color: #5b3a29;
+      color: white;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s;
+    }
+
+    #reservas button:hover {
+      background-color: #a36d44;
+    }
+
+    .qr-box, .horarios-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 250px;
+    }
+
+    .qr-box img {
+      width: 150px;
+      height: 150px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    .horarios-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9em;
+    }
+
+    .horarios-box th, .horarios-box td {
+      border: 1px solid #ccc;
+      padding: 6px;
+    }
+
+    #ubicacion {
+      background-color: #fff3e0;
+      flex-direction: column;
+    }
+
+    iframe {
+      border: 0;
+      width: 80%;
+      height: 400px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      background-color: #3c2a21;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    /* 📱 --- ESTILOS RESPONSIVE --- */
+
+    @media (max-width: 1024px) {
+      #nosotros {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      #nosotros .texto {
+        width: 90%;
+      }
+      #nosotros img {
+        width: 280px;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.5em;
+      }
+
+      nav a, .lang-btn {
+        font-size: 0.9em;
+        padding: 10px 12px;
+      }
+
+      .plato {
+        width: 160px;
+      }
+
+      iframe {
+        width: 95%;
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 0.9em;
+      }
+
+      header h1 {
+        font-size: 1.3em;
+      }
+
+      section {
+        padding: 25px;
+      }
+
+      .plato {
+        width: 90%;
+        max-width: 280px;
+      }
+
+      #reservas form, .qr-box, .horarios-box {
+        width: 90%;
+      }
+
+      .menu-grid {
+        gap: 15px;
+      }
+
+      .horarios-box table th, .horarios-box table td {
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 data-es="Restaurante Alax Pacha" data-en="Alax Pacha Restaurant">Restaurante Alax Pacha</h1>
+    <p data-es="Sabores tradicionales de Bolivia con un toque contemporáneo" data-en="Traditional Bolivian flavors with a modern touch">Sabores unicos y deliciosos en un solo lugar</p>
+  </header>
+
+  <nav>
+    <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="#menu" data-es="Menú" data-en="Menu">Menú</a>
+    <a href="#nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a>
+    <a href="#reservas" data-es="Reservas" data-en="Reservations">Reservas</a>
+    <a href="#ubicacion" data-es="Ubicación" data-en="Location">Ubicación</a>
+    <button class="lang-btn" onclick="cambiarIdioma('es')">🇪🇸</button>
+    <button class="lang-btn" onclick="cambiarIdioma('en')">🇺🇸</button>
+  </nav>
+
+  <section id="inicio">
+    <h2 data-es="Bienvenidos a Alax Pacha" data-en="Welcome to Alax Pacha">Bienvenidos a Alax Pacha</h2>
+    <p data-es="Descubre una experiencia culinaria única inspirada en la tierra y el cielo boliviano." data-en="Discover a unique culinary experience inspired by Bolivian land and sky.">Descubre una experiencia culinaria única y deliciosa en un ambiende natural.</p>
+  </section>
+
+  <section id="menu">
+    <h2 data-es="Nuestro Menú" data-en="Our Menu">Nuestro Menú</h2>
+    <div class="menu-grid">
+      <a href="plato 1.html" class="plato">
+        <img src="https://imag.bonviveur.com/espaguetis-a-la-bolonesa.jpg" alt="Spaghetti a la Boloñesa">
+        <h3>Spaghetti a la Boloñesa</h3>
+        <span class="precio">Bs. 40</span>
+      </a>
+      <a href="plato 2.html" class="plato">
+        <img src="https://comedera.com/wp-content/uploads/sites/9/2024/06/Lomo-de-cerdo-a-la-plancha.jpg" alt="Lomo a la Plancha">
+        <h3>Lomo a la Plancha</h3>
+        <span class="precio">Bs. 35</span>
+    </a>
+    <a href="plato 3.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_MTyAk1IlsMKdC2oaXynfE69Ajed5KjOH0Q&s" alt="Arroz con Pollo">
+        <h3>Arroz con Pollo</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 4.html" class="plato">
+        <img src="https://s-api.qcart.app/images/comoquiero-uploads/images/recipes/originals/3703.jpg?s=716x600&fit=cover&ext=webp" alt="Alboldigas con Pure">
+        <h3>Alboldigas con Pure</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 5.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzWAV18o0yWsuy3kdYGTbX9f1nEXrSoPojmg&s" alt="Pizza Napolitana">
+        <h3>Pizza Napolitana</h3>
+        <span class="precio">Bs. 50</span>
+    </a>
+    <a href="plato 6.html" class="plato">
+        <img src="https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/b876d8ea-fc9b-4b04-9958-9c70fe1c74e0/Derivates/fb3399fa-df15-4d0d-9beb-83a79a37a16e.jpg" alt="Ensalada Cesar">
+        <h3>Ensalada Cesar</h3>
+        <span class="precio">Bs. 25</span>
+    </a>
+    <a href="plato 7.html" class="plato">
+        <img src="https://cdn7.kiwilimon.com/recetaimagen/229/640x640/16781.jpg.webp" alt="Hamburguesa Clasica">
+        <h3>Hamburguesa Clasica</h3>
+        <span class="precio">Bs. 20</span>
+    </a>
+    <a href="plato 8.html" class="plato">
+        <img src="https://www.huleymantel.com/uploads/s1/30/73/78/lasan-a-de-carne-canva.jpeg" alt="Lasagna de Carnea">
+        <h3>Lasagna de Carne</h3>
+        <span class="precio">Bs. 45</span>
+    </a>
+    <a href="plato 9.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-fCF4Ixem9l6u2QqqEJeulfP-2AamWDM1cA&s" alt="Filete de Pescado Frito">
+        <h3>Filete de Pescado Frito</h3>
+        <span class="precio">Bs. 50</span>
+    </a>
+    <a href="plato 10.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgJES9cMf7xu8qNLnGiVxTCOBLGjRCn3L0YQ&s" alt="Pollo al Curry">
+        <h3>Pollo al Curry</h3>
+        <span class="precio">Bs. 40</span>
+    </a>
+    <a href="plato 11.html" class="plato">
+        <img src="https://campollo.com/wp-content/uploads/2024/05/GettyImages-1142667686.jpg" alt="Pechuga en Salsa de Champiñones">
+        <h3>Pechuga en Salsa de Champiñones</h3>
+        <span class="precio">Bs. 40</span>
+    </a>
+    <a href="plato 12.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkQOx9cTmDNQqbC5bQ4KOvJtGSRgyt7lmmvQ&s" alt="Papas Gratinadas">
+        <h3>Papas Gratinadas</h3>
+        <span class="precio">Bs. 25</span>
+    </a>
+    <a href="plato 13.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeWEn-BrNCiTrHKy4ly7umMOXrqzgsaGfXRA&s" alt="Tacos de Pollo">
+        <h3>Tacos de Pollo</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 14.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3r7AARteuzExVGHkrubMfPM5-cLQxvk30zw&s" alt="Ensalada de Atun">
+        <h3>Ensalada de Atun</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 15.html" class="plato">
+        <img src="https://i.ytimg.com/vi/Ric2AJVURzc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDXDlGmIdViRMBR4pGGnnlRvTCKTg" alt="Pollo Empanizado">
+        <h3>Pollo Empanizado</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 16.html" class="plato">
+        <img src="https://mojo.generalmills.com/api/public/content/tr0_JwcrBE6ze026NXIxJQ_gmi_hi_res_jpeg.jpeg?v=7b4d4619&t=16e3ce250f244648bef28c5949fb99ff" alt="Panini de Jamon y Queso">
+        <h3>Panini de Jamon y Queso</h3>
+        <span class="precio">Bs. 25</span>
+    </a>
+    <a href="plato 17.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG_5L5zPlgoFPKzhHYEhHTXPhzcXHGsHJZJg&s" alt="Crema de Verduras">
+        <h3>Crema de Verduras</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 18.html" class="plato">
+        <img src="https://hips.hearstapps.com/hmg-prod/images/receta-brocheta-ternera-verduras-elle-gourmet-6463597a1ed08.jpg?crop=1.00xw:0.669xh;0,0.251xh&resize=1200:*" alt="Brochetas de Carne">
+        <h3>Brochetas de Carne</h3>
+        <span class="precio">Bs. 40</span>
+    </a>
+    <a href="plato 19.html" class="plato">
+        <img src="https://7diasdesabor.com/wp-content/uploads/2021/09/493e23e828b42daa28a018c7377ae170.jpg" alt="Omelette de Verduras">
+        <h3>Omelette de Verduras</h3>
+        <span class="precio">Bs. 25</span>
+    </a>
+    <a href="plato 20.html" class="plato">
+        <img src="https://jetextramar.com/wp-content/uploads/2021/09/receta-de-tallarin-empresa-de-alimentos.jpg" alt="Tallarines al Pesto">
+        <h3>Tallarines al Pesto</h3>
+        <span class="precio">Bs. 45</span>
+    </a>
+    <a href="plato 21.html" class="plato">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/19/50/49/15/churrasco-mixto.jpg" alt="Churrasco Mixto">
+        <h3>Churrasco Mixto</h3>
+        <span class="precio">Bs. 60</span>
+    </a>
+    <a href="plato 22.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCCvyVEmPuoBxfOw2UtDYcdey1Ep-MvpNkag&s" alt="Milanesa de Res">
+        <h3>Milanesa de Res</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 23.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5v7mGU513-ONSh-_dnOgnuPp1fBYP9KubUg&s" alt="Tallarines al Pesto">
+        <h3>Pollo Teriyaki</h3>
+        <span class="precio">Bs. 45</span>
+    </a>
+    <a href="plato 24.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPqy9hzvU2R6-8278COnWuaoo6ZQctdaz74g&s" alt="Fetuccini Alfredo">
+        <h3>Fetuccini Alfredo</h3>
+        <span class="precio">Bs. 50</span>
+    </a>
+    <a href="plato 25.html" class="plato">
+        <img src="https://i.ytimg.com/vi/K32pFyb46iA/maxresdefault.jpg" alt="Ravioles de Espinaca">
+        <h3>Ravioles de Espinaca</h3>
+        <span class="precio">Bs. 30</span>
+    </a>
+    <a href="plato 26.html" class="plato">
+        <img src="https://content.elmueble.com/medio/2023/05/23/desayunos-saludables_d679edca_230523094402_900x900.jpg" alt="Milanesa de Res">
+        <h3>Desayunos</h3>
+        <span class="precio">Bs. 20</span>
+    </a>
+    <a href="plato 27.html" class="plato">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb8cUfs7H-hyZrsSJDfhpasHTJI5-pS2sXPA&s" alt="Tallarines al Pesto">
+        <h3>Postres</h3>
+        <span class="precio">Bs. 15</span>
+    </a>
+    <a href="plato 28.html" class="plato">
+        <img src="https://i.pinimg.com/236x/a9/79/c5/a979c595d11fad39600357ef01b165ff.jpg" alt="Fetuccini Alfredo">
+        <h3>Gaseosas Frias</h3>
+        <span class="precio">Bs. 15</span>
+    </a>
+    <a href="plato 29.html" class="plato">
+        <img src="https://lirp.cdn-website.com/586fb047/dms3rep/multi/opt/jugos+naturales-640w.jpg" alt="Ravioles de Espinaca">
+        <h3>Jugos Naturales</h3>
+        <span class="precio">Bs. 20</span>
+    </a>
+    <a href="plato 30.html" class="plato">
+        <img src="https://fotografias.larazon.es/clipping/cmsimages01/2019/08/06/A4D9B264-5C52-407F-9B3E-3D66FA46A531/98.jpg?crop=1031,580,x0,y53&width=1900&height=1069&optimize=low&format=webply" alt="Ravioles de Espinaca">
+        <h3>Bebidas Calientes</h3>
+        <span class="precio">Bs. 10</span>
+    </a>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="texto">
+      <h2>Sobre Nosotros</h2>
+      <p>
+        En Alax Pacha, celebramos con orgullo la diversidad culinaria boliviana, honrando las raices ancestrales que dan vida a nuestros sabores.
+        Cada plato que servimos es el resultado de una innovacion, donde las recetas heredadas se transforman con un toque contemporaneo, sin perder su esencia.
+        <br><br>
+        Trabajamos con ingredientes frescos y autenticos, provenientes tanto de las alturas andinas como de los valles tropicales, creando una experiencia unica que conecta lo mejor de cada region.
+        Nuestra cocina busca rescatar la identidad de los pueblos, mostrando que la gastronomia es tambien una forma de contar historias, preservar la memoria y compartir emociones.
+        <br><br>
+        Nuestra mision es conectar a las personas con la esencia culinaria a traves de los sentidos: el sabor, el aroma y el color de nuestros platos reflejan la riqueza cultural y natural del pais.
+        En un ambiente calido y armonioso, honramos la tierra, la cultura y la comunidad, ofreciendo mucho mas que una comida: una experiencia que celebra nuestra raices y mira hacia el futuro con creatividad y respecto.
+      </p>
+    </div>
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Cocina Boliviana">
+  </section>
+
+  <section id="reservas">
+    <h2 data-es="Reservas" data-en="Reservations">Reservas</h2>
+    <div class="reservas-contenido">
+      <form id="formReservas" onsubmit="enviarWhatsApp(event)">
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <input type="email" id="correo" placeholder="Correo electrónico" required>
+        <input type="number" id="personas" placeholder="Número de personas" required>
+        <input type="date" id="fecha" required>
+        <textarea id="mensaje" placeholder="Mensaje o solicitud especial"></textarea>
+        <button type="submit">Enviar por WhatsApp</button>
+      </form>
+
+      <div class="qr-box">
+        <h3 data-es="Pago Digital" data-en="Digital Payment">Pago Digital</h3>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://wa.me/59171969398?text=Pago%20de%20reserva%20Alax%20Pacha&size=150x150" alt="QR de Pago">
+      </div>
+
+      <div class="horarios-box">
+        <h3 data-es="Horarios de Atención" data-en="Opening Hours">Horarios de Atención</h3>
+        <table>
+          <tr><th>Día</th><th>Horario</th></tr>
+          <tr><td>Lunes - Viernes</td><td>08:00 - 21:00</td></tr>
+          <tr><td>Sábado</td><td>10:00 - 19:00</td></tr>
+          <tr><td>Domingo</td><td>12:00 - 20:00</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <h2 data-es="Ubicación" data-en="Location">Ubicación</h2>
+    <p data-es="Av. 6 de Agosto, Copacabana - La Paz, Bolivia" data-en="Av. 6 de Agosto, Copacabana - La Paz, Bolivia">Av. 6 de Agosto, Copacabana - La Paz, Bolivia</p>
+    <iframe src="https://www.google.com/maps?q=Av.+6+de+agosto,+Restaurante+Alax+Pacha,+Copacabana,+Bolivia&output=embed"></iframe>
+  </section>
+
+  <footer>
+    <p>© 2025 Restaurante Alax Pacha | Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    // Enviar datos por WhatsApp
+    function enviarWhatsApp(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const personas = document.getElementById("personas").value;
+      const fecha = document.getElementById("fecha").value;
+      const mensaje = document.getElementById("mensaje").value;
+      const telefono = "59171969398";
+      const texto = `🍽️ *Nueva Reserva Alax Pacha* 🍽️
+👤 Nombre: ${nombre}
+📧 Correo: ${correo}
+👥 Personas: ${personas}
+📅 Fecha: ${fecha}
+💬 Mensaje: ${mensaje}`;
+      window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`, "_blank");
+    }
+
+    // Cambio de idioma
+    function cambiarIdioma(idioma) {
+      document.querySelectorAll("[data-es]").forEach(el => {
+        el.textContent = el.getAttribute(`data-${idioma}`);
+      });
+    }
+  </script>
+</body>
+</html>
